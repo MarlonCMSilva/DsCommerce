@@ -1,8 +1,10 @@
 package com.marlonmachado.dscommerce.services;
 
+import com.marlonmachado.dscommerce.entities.Role;
+import com.marlonmachado.dscommerce.entities.User;
 import com.marlonmachado.dscommerce.projections.UserDetailsProjection;
 import com.marlonmachado.dscommerce.repositories.UserRepository;
-import org.apache.catalina.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,8 +25,14 @@ public class UserService implements UserDetailsService {
            throw new UsernameNotFoundException("User not found");
        }
 
+       User user = new User();
+       user.setEmail(username);
+       user.setPassword(result.get(0).getPassword());
 
+       for(UserDetailsProjection projection : result){
+           user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
+       }
 
-       return null;
+       return user;
     }
 }
