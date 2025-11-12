@@ -44,6 +44,10 @@ public class User implements UserDetails{
         this.birthDate = birthDate;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     public Long getId() {
         return id;
     }
