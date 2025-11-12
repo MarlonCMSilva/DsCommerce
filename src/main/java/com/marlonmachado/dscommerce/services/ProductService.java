@@ -57,7 +57,6 @@ public class ProductService {
         }catch(EntityNotFoundException e) {
             throw new ResourceNotFoundException("Recurso não encontrado");
         }
-
     }
 
 

@@ -14,17 +14,13 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
 
     @Column(unique = true)
     private String email;
-
     private String phone;
-
-    private LocalDate birthDate;
-
     private String password;
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
@@ -36,18 +32,16 @@ public class User implements UserDetails{
     private Set<Role> roles = new HashSet<>();
 
 
-
-
     public User(){
     }
 
-    public User(Long id, String name, String email, String phone, LocalDate birthDate, String password) {
+    public User(Long id, String name, String email, String phone, String password, LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.birthDate = birthDate;
         this.password = password;
+        this.birthDate = birthDate;
     }
 
     public Long getId() {
