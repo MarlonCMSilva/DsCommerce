@@ -1,6 +1,7 @@
 package com.marlonmachado.dscommerce.services;
 
 import com.marlonmachado.dscommerce.dto.ProductDTO;
+import com.marlonmachado.dscommerce.dto.ProductMinDTO;
 import com.marlonmachado.dscommerce.entities.Product;
 import com.marlonmachado.dscommerce.repositories.ProductRepository;
 import com.marlonmachado.dscommerce.services.exceptions.DatabaseException;
@@ -31,9 +32,9 @@ public class ProductService {
 
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageable) {
+    public Page<ProductMinDTO> findAll(Pageable pageable) {
         Page<Product> result = repository.findAll(pageable);
-        return result.map(x -> new ProductDTO(x));
+        return result.map(x -> new ProductMinDTO(x));
     }
 
 

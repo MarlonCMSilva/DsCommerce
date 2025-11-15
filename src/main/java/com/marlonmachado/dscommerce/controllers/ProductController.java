@@ -1,7 +1,7 @@
 package com.marlonmachado.dscommerce.controllers;
 
 import com.marlonmachado.dscommerce.dto.ProductDTO;
-
+import com.marlonmachado.dscommerce.dto.ProductMinDTO;
 import com.marlonmachado.dscommerce.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value= "/products")
@@ -31,8 +30,8 @@ public class ProductController {
 
 
     @GetMapping
-    public ResponseEntity <Page<ProductDTO>> findAll(Pageable pageable) {
-        Page<ProductDTO> dto =  service.findAll(pageable);
+    public ResponseEntity <Page<ProductMinDTO>> findAll(Pageable pageable) {
+        Page<ProductMinDTO> dto =  service.findAll(pageable);
 
         return ResponseEntity.ok(dto);
     }
