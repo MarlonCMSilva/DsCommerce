@@ -1,8 +1,12 @@
 package com.marlonmachado.dscommerce.dto;
 
+import com.marlonmachado.dscommerce.entities.Category;
 import com.marlonmachado.dscommerce.entities.Product;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDTO {
     private Long id;
@@ -10,16 +14,15 @@ public class ProductDTO {
     @Size(min = 3, max = 80, message = ("Nome precisa ter de 3 a 80 caracteres"))
     @NotBlank(message = "Campo requerido")
     private String name;
-
     @Size(min = 10, message = ("Descrição precisa ter no minimo 10 caracteres"))
     @NotBlank(message = "Campo requerido")
     private String description;
-
     @Positive(message="o preço deve ser posistivo")
     private Double price;
-
     private String imgUrl;
 
+    @NotEmpty
+    private List<CategoryDTO> categories = new ArrayList<>();
 
     public ProductDTO() {
     }
@@ -39,6 +42,9 @@ public class ProductDTO {
         description = entity.getDescription();
         price = entity.getPrice();
         imgUrl = entity.getImgUrl();
+        for(Category cat : entity.getCategories()){
+            categories.add(new CategoryDTO(cat));
+        }
     }
 
     public Long getId() {
@@ -59,5 +65,9 @@ public class ProductDTO {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
     }
 }

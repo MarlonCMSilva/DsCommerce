@@ -1,7 +1,9 @@
 package com.marlonmachado.dscommerce.services;
 
+import com.marlonmachado.dscommerce.dto.CategoryDTO;
 import com.marlonmachado.dscommerce.dto.ProductDTO;
 import com.marlonmachado.dscommerce.dto.ProductMinDTO;
+import com.marlonmachado.dscommerce.entities.Category;
 import com.marlonmachado.dscommerce.entities.Product;
 import com.marlonmachado.dscommerce.repositories.ProductRepository;
 import com.marlonmachado.dscommerce.services.exceptions.DatabaseException;
@@ -32,8 +34,8 @@ public class ProductService {
 
 
     @Transactional(readOnly = true)
-    public Page<ProductMinDTO> findAll(Pageable pageable) {
-        Page<Product> result = repository.findAll(pageable);
+    public Page<ProductMinDTO> findAll(String name, Pageable pageable) {
+        Page<Product> result = repository.searchByName(name, pageable);
         return result.map(x -> new ProductMinDTO(x));
     }
 
@@ -79,5 +81,12 @@ public class ProductService {
         entity.setDescription(dto.getDescription());
         entity.setImgUrl((dto.getImgUrl()));
         entity.setPrice(dto.getPrice());
+
+        entity.getCategories().clear();
+        for(CategoryDTO catDto : dto.getCategories()){
+            Category cat = new Category();
+            cat.setId(catDto.getId());
+            entity.getCategories().add(cat);
+        }
     }
 }
