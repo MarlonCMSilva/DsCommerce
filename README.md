@@ -27,6 +27,45 @@ Esta seção detalha as tecnologias e os padrões de desenvolvimento aplicados, 
 
 ---
 
+--
+
+## 📊 Diagrama de Classes (Modelo de Dados)
+
+![dscommerce-table](https://github.com/user-attachments/assets/7d3742c0-0288-4e44-8223-f6194ef2e5c7)
+
+### Visão Geral das Entidades
+
+- **User**
+  Contém informações pessoais e credenciais de autenticação. Um usuário pode fazer múltiplos pedidos.
+
+- **Order**
+  Representa uma compra feita por um usuário. Contém um status (ex: PAGO, ENVIADO) e pode ter um pagamento associado.
+
+- **OrderItem**
+  Representa um item dentro de um pedido. Conecta um produto ao pedido com quantidade e preço.
+
+- **Product**
+  Itens disponíveis na loja. Cada produto pode pertencer a uma ou mais categorias.
+
+- **Category**
+  Usada para classificar produtos.
+
+- **Payment**
+  Representa um pagamento relacionado a um pedido específico.
+
+- **OrderStatus (Enum)**
+  Os valores incluem:
+    - `WAITING_PAYMENT` (AGUARDANDO_PAGAMENTO)
+    - `PAID` (PAGO)
+    - `SHIPPED` (ENVIADO)
+    - `DELIVERED` (ENTREGUE)
+    - `CANCELED` (CANCELADO)
+
+
+---
+
+
+
 ## 🛠️ Funcionalidades da API
 
 A API oferece um conjunto completo de funcionalidades para gerenciar um e-commerce:
@@ -114,7 +153,8 @@ Para facilitar os testes e a demonstração do fluxo de autenticação OAuth 2.0
 2.  **Importe a Collection:** Importe a Collection do Postman `DsCommerce.postman_collection.json` para ter acesso a todos os endpoints.
 3.  **Obtenha o Token:** Utilize o endpoint de Login para obter o `access_token` e armazená-lo na variável de ambiente do Postman.
 4.  **Execute os Testes:** Agora você pode executar as requisições que exigem autenticação, como as rotas de `ROLE_CLIENT` e `ROLE_ADMIN`.
-
+---
+![postmancollection](https://github.com/user-attachments/assets/eb3cc69c-0d03-41cb-9b89-b0d5f5a2d653)
 ---
 
 ## 🧑‍💻 Autor
